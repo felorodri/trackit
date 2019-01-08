@@ -3,7 +3,15 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebaseConfig: {
+  	apiKey: "AIzaSyDJ7dPKOrhhMm5UclFS6AlEL0e1A7xJlhQ",
+  	authDomain: "angular7-fireabase.firebaseapp.com",
+    databaseURL: "https://angular7-fireabase.firebaseio.com",
+    projectId: "angular7-fireabase",
+    storageBucket: "angular7-fireabase.appspot.com",
+    messagingSenderId: "635360909185"
+	}
 };
 
 /*
@@ -14,3 +22,5 @@ export const environment = {
  * on performance if an error is thrown.
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
+
+

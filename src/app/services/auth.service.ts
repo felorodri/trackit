@@ -5,6 +5,7 @@ import { auth } from 'firebase/app';
 import { User } from '../clases/user';
 import { Observable } from 'rxjs';
 import { NgZone } from '@angular/core';
+import { EncryptionService } from '../services/encryption.service';
 
 // @Injectable({
 //   providedIn: 'root'
@@ -16,12 +17,12 @@ export class AuthService {
 	private appUser: User;
   private user: Observable<firebase.User>;
   private userData: firebase.User = null;
+  private token = null;
 
-  constructor (private afAuth: AngularFireAuth, private router: Router, private zone: NgZone) { 
-    if (sessionStorage.getItem('user')) {
-      this.appUser = JSON.parse(sessionStorage.getItem('user'));
+  constructor (private afAuth: AngularFireAuth, private router: Router, private zone: NgZone, private enc: EncryptionService) { 
+    if (sessionStorage.getItem('user') && sessionStorage.getItem('token')) {
+      this.appUser = JSON.parse(enc.decrypt(sessionStorage.getItem('token'), sessionStorage.getItem('user')));
     }else{
-
       this.user = this.afAuth.authState; 
       this.user.subscribe(
         (user) => {
@@ -29,19 +30,17 @@ export class AuthService {
             this.userData = user;
             this.appUser = {
               name: this.userData.displayName,
-              email: this.userData.email
+              email: this.userData.email,
+              metadata: this.userData
             };
-            console.log(this.userData);
-            console.log(this.appUser);
-            sessionStorage.setItem('user', JSON.stringify(this.appUser));
+            sessionStorage.setItem('user', enc.encrypt(this.userData['refreshToken'], JSON.stringify(this.appUser)));
+            sessionStorage.setItem('token', this.userData['refreshToken']);
           } else {
             this.userData = null;
           }
         }
       );
-      
     }
-
   }
 
   // login(email: string, password: string) {
@@ -66,7 +65,7 @@ export class AuthService {
   //     });
   // }
 
-
+  // This method execute the Google provider login popup
   googleLogin() {
     const provider = new auth.GoogleAuthProvider();
     return this.afAuth.auth.signInWithPopup(provider).then(()=>{
@@ -74,41 +73,24 @@ export class AuthService {
     });
   }
 
-
-
-  // googleLogin() {
-  //   const provider = new auth.GoogleAuthProvider();
-  //   return this.oAuthLogin(provider)
-  //     .then(value => {
-  //       console.log('Sucess', value),
-  //       // console.log('The given name is ' + value.user.displayName),
-  //       this.appUser={
-  //         name: value.user.displayName
-  //       };
-  //       this.zone.run(() => { this.router.navigate(['/home']); });
-  //       // this.router.navigateByUrl('/home');
-  //     })
-  //     .catch(error => {
-  //       console.log('Something went wrong: ', error);
-  //     });
-  // }
-
   logout() {
     this.afAuth.auth.signOut().then(() => {
       this.appUser = null;
       this.userData = null;
       sessionStorage.removeItem('user');
+      sessionStorage.removeItem('token');
       this.router.navigate(['/']);
     });
   }
 
-  private oAuthLogin(provider) {
-    return this.afAuth.auth.signInWithPopup(provider);
-  }
+  // This method execute the signin popup from the selected provider.
+  // private oAuthLogin(provider) {
+  //   return this.afAuth.auth.signInWithPopup(provider);
+  // }
 
+  // This method returns the current user info. 
   currentUser() {
   	return this.appUser;
   }
-
 }
 

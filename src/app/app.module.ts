@@ -9,6 +9,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { UicomponentsModule } from './uicomponents/uicomponents.module';
 import { environment } from '../environments/environment';
 import { AuthService } from './services/auth.service';
+import { EncryptionService } from './services/encryption.service';
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -29,7 +30,10 @@ import { DashboardComponent } from './dashboard/dashboard.component';
     AngularFireAuthModule, // imports firebase/auth, only needed for auth features,
     AngularFireStorageModule // imports firebase/storage only needed for storage features
   ],
-  providers: [AuthService],
+  providers: [
+    AuthService,
+    EncryptionService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { 

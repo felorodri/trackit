@@ -5,22 +5,12 @@ import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 const routes: Routes = [{
-    path: 'home',
-    component: HomeComponent,
-    data: {
-    	sidebar: false,
-    	title: '',
-    	icon: ''
-    }
+    path: '',
+    component: HomeComponent
   },
   {
     path: 'login',
-    component: LoginComponent,
-    data: {
-    	sidebar: false,
-    	title: '',
-    	icon: ''
-    }
+    component: LoginComponent
   }, 
   {
   	path: 'dashboard',
@@ -32,13 +22,14 @@ const routes: Routes = [{
     }
   },
   {
-    path: '',
-    component: HomeComponent,
-    data: {
-    	sidebar: false,
-    	title: '',
-    	icon: ''
-    }
+    path: 'home',
+    redirectTo: '',
+    pathMatch: 'full'
+  },
+  {
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full'
   }];
 
 @NgModule({

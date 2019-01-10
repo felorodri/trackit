@@ -6,9 +6,11 @@ import { User } from '../clases/user';
 import { Observable } from 'rxjs';
 import { NgZone } from '@angular/core';
 
-@Injectable({
-  providedIn: 'root'
-})
+// @Injectable({
+//   providedIn: 'root'
+// })
+
+@Injectable()
 
 export class AuthService {
 	private appUser: User;
@@ -16,21 +18,30 @@ export class AuthService {
   private userData: firebase.User = null;
 
   constructor (private afAuth: AngularFireAuth, private router: Router, private zone: NgZone) { 
-    this.user = this.afAuth.authState; 
-    this.user.subscribe(
-      (user) => {
-        if (user) {
-          this.userData = user;
-          this.appUser = {
-            name: this.userData.displayName,
-            email: this.userData.email
-          };
-          // console.log(this.userData);
-        } else {
-          this.userData = null;
+    if (sessionStorage.getItem('user')) {
+      this.appUser = JSON.parse(sessionStorage.getItem('user'));
+    }else{
+
+      this.user = this.afAuth.authState; 
+      this.user.subscribe(
+        (user) => {
+          if (user) {
+            this.userData = user;
+            this.appUser = {
+              name: this.userData.displayName,
+              email: this.userData.email
+            };
+            console.log(this.userData);
+            console.log(this.appUser);
+            sessionStorage.setItem('user', JSON.stringify(this.appUser));
+          } else {
+            this.userData = null;
+          }
         }
-      }
-    );
+      );
+      
+    }
+
   }
 
   // login(email: string, password: string) {
@@ -86,6 +97,7 @@ export class AuthService {
     this.afAuth.auth.signOut().then(() => {
       this.appUser = null;
       this.userData = null;
+      sessionStorage.removeItem('user');
       this.router.navigate(['/']);
     });
   }
@@ -97,5 +109,6 @@ export class AuthService {
   currentUser() {
   	return this.appUser;
   }
+
 }
 

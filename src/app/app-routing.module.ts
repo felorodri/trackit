@@ -17,8 +17,8 @@ const routes: Routes = [{
   	component: DashboardComponent,
   	data: {
     	sidebar: true,
-    	title: '',
-    	icon: ''
+    	title: 'Dashboard',
+    	icon: 'dashboard'
     }
   },
   {

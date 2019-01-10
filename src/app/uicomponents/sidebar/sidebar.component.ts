@@ -8,18 +8,25 @@ import { Router } from '@angular/router';
 })
 
 export class SidebarComponent implements OnInit {
-  menuItems: any[];
-    constructor(private router: Router){
-        console.log(this.router.config);
+  allRoutes: any[];
+  menuItems = [];
+  constructor(private router: Router){
+    this.allRoutes = this.router.config;
+  }
+  ngOnInit() {
+    for (var i = 0; i< this.allRoutes.length; i++) {
+      if (this.allRoutes[i].data && 
+      this.allRoutes[i].data.sidebar && 
+      this.allRoutes[i].data.sidebar == true) {
+        this.menuItems.push(this.allRoutes[i]);   
+      }      
     }
-    ngOnInit() {
-      // this.menuItems = ROUTES.filter(menuItem => menuItem);
-      // console.log(this.menuItems);
-    }
-    isMobileMenu() {
-        // if ($(window).width() > 991) {
-        //     return false;
-        // }
-        // return true;
-    };
+    console.log(this.menuItems);
+  }
+  isMobileMenu() {
+    // if ($(window).width() > 991) {
+    //     return false;
+    // }
+    // return true;
+  };
 }

@@ -7,5 +7,6 @@
   <button (click)="auth.logout()">Logout</button>
 </div>
 <ng-template #showLogin>
-  <p>Please login.</p>
+  <!-- <a routerLink="/login">Please login.</a> -->
+  <button (click)="router.navigate(['/login'])">Login</button>
 </ng-template>

@@ -21,12 +21,5 @@ export class SidebarComponent implements OnInit {
         this.menuItems.push(this.allRoutes[i]);   
       }      
     }
-    console.log(this.menuItems);
   }
-  isMobileMenu() {
-    // if ($(window).width() > 991) {
-    //     return false;
-    // }
-    // return true;
-  };
 }

@@ -1,19 +1,29 @@
+// Angular Core components and modules
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+// External services modules and components
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
 import { AngularFireAuthModule } from '@angular/fire/auth';
+import { ToastrModule } from 'ng6-toastr-notifications';
+// Own app modules
 import { UicomponentsModule } from './uicomponents/uicomponents.module';
-import { environment } from '../environments/environment';
+// Own app services
 import { AuthService } from './services/auth.service';
 import { EncryptionService } from './services/encryption.service';
+import { NotificationsService } from './services/notifications.service';
+// Own app components
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
+// Own app config files
+import { environment } from '../environments/environment';
+
 
 @NgModule({
   declarations: [
@@ -25,6 +35,8 @@ import { ProfileComponent } from './profile/profile.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule, 
+    ToastrModule.forRoot(),
     AppRoutingModule,
     UicomponentsModule,
     AngularFireModule.initializeApp(environment.firebaseConfig), // imports firebase/app needed for everything
@@ -34,7 +46,8 @@ import { ProfileComponent } from './profile/profile.component';
   ],
   providers: [
     AuthService,
-    EncryptionService
+    EncryptionService,
+    NotificationsService
   ],
   bootstrap: [AppComponent]
 })

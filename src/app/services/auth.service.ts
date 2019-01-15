@@ -1,3 +1,8 @@
+/**
+  * Created by: Julian Rodriguez
+  * Created on: 07/11/2018
+  * Description: Auth service for the whole app.
+*/
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { AngularFireAuth } from '@angular/fire/auth';
@@ -6,10 +11,6 @@ import { User } from '../clases/user';
 import { Observable } from 'rxjs';
 import { NgZone } from '@angular/core';
 import { EncryptionService } from '../services/encryption.service';
-
-// @Injectable({
-//   providedIn: 'root'
-// })
 
 @Injectable()
 

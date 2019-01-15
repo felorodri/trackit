@@ -1,3 +1,9 @@
+/**
+  * Created by: Julian Rodriguez
+  * Created on: 11/01/2019
+  * Description: Encryption service created to encrypt and decrypt 
+  * the logged user info and settings based in a salt called token.
+*/
 import { Injectable } from '@angular/core';
 import * as CryptoJS from 'crypto-js';
 
@@ -19,7 +25,7 @@ export class EncryptionService {
       });
       return encrypted.toString();
     }
-    //This method is used for decrypt a given value.
+  //This method is used for decrypt a given value.
   decrypt(salt, value){
     var key = CryptoJS.enc.Utf8.parse(salt);
     var iv = CryptoJS.enc.Utf8.parse(salt);

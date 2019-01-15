@@ -1,3 +1,8 @@
+/**
+  * Created by: Julian Rodriguez
+  * Created on: 14/01/2019
+  * Description: Popup notifications service for the whole app.
+*/
 import { Injectable } from '@angular/core';
 import { ToastrManager } from 'ng6-toastr-notifications';
 

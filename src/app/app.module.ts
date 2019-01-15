@@ -16,6 +16,7 @@ import { UicomponentsModule } from './uicomponents/uicomponents.module';
 import { AuthService } from './services/auth.service';
 import { EncryptionService } from './services/encryption.service';
 import { NotificationsService } from './services/notifications.service';
+import { TranslationsService } from './services/translations.service';
 // Own app components
 import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
@@ -23,7 +24,6 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
 // Own app config files
 import { environment } from '../environments/environment';
-
 
 @NgModule({
   declarations: [
@@ -47,10 +47,11 @@ import { environment } from '../environments/environment';
   providers: [
     AuthService,
     EncryptionService,
-    NotificationsService
+    NotificationsService,
+    TranslationsService
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule { 
-  constructor (private auth: AuthService){}
+  constructor (private auth: AuthService, private trans: TranslationsService){ }
 }

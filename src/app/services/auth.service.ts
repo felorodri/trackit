@@ -32,7 +32,8 @@ export class AuthService {
             this.appUser = {
               name: this.userData.displayName,
               email: this.userData.email,
-              metadata: this.userData
+              metadata: this.userData,
+              language: 'es'
             };
             sessionStorage.setItem('user', enc.encrypt(this.userData['refreshToken'], JSON.stringify(this.appUser)));
             sessionStorage.setItem('token', this.userData['refreshToken']);

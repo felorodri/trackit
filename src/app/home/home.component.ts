@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { NotificationsService } from '../services/notifications.service';
-
 import { TranslationsService } from '../services/translations.service';
 
 @Component({

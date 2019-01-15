@@ -5,5 +5,6 @@
 */
 // Translations definitions and object exportation
 export const esCo = {
-  hola: 'mundo'
+	'Dashboard': 'Panel principal',
+  'User Profile': 'Perfil de usuario'
 };

@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   constructor(private auth: AuthService, private router: Router, 
     private notify: NotificationsService, private trans: TranslationsService) {
   	// notify.showSuccess();
-    // console.log(this.auth.currentUser());
+    console.log(this.auth.currentUser());
   }
   
   ngOnInit() { }

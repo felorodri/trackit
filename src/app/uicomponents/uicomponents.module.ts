@@ -12,7 +12,8 @@ import { FooterComponent } from './footer/footer.component';
     RouterModule
   ],
   exports: [
-  	SidebarComponent
+  	SidebarComponent,
+  	NavbarComponent
   ]
 })
 export class UicomponentsModule { }

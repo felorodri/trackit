@@ -5,6 +5,8 @@ import { TranslationsService } from '../../services/translations.service';
 
 declare const $: any;
 
+export var MenuItems: any[];
+
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
@@ -26,6 +28,7 @@ export class SidebarComponent implements OnInit {
         this.menuItems.push(this.allRoutes[i]);
       }      
     }
+    MenuItems = this.menuItems;
   }
   isMobileMenu() {
     if ($(window).width() > 991) {

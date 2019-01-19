@@ -1,4 +1,3 @@
-<!-- Navbar -->
 <nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute fixed-top">
   <div class="container-fluid">
     <!-- Page name according to user language option -->
@@ -13,7 +12,7 @@
       <span class="navbar-toggler-icon icon-bar"></span>
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navigation">
-      <form class="navbar-form">
+      <!-- <form class="navbar-form">
         <div class="input-group no-border">
           <input type="text" value="" class="form-control" placeholder="Search...">
           <button mat-raised-button type="submit" class="btn btn-white btn-round btn-just-icon">
@@ -21,17 +20,17 @@
             <div class="ripple-container"></div>
           </button>
         </div>
-      </form>
+      </form> -->
       <ul class="navbar-nav">
         <!-- Dashboard dropdown -->
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a class="nav-link" href="#pablo">
             <i class="material-icons">dashboard</i>
             <p>
               <span class="d-lg-none d-md-block">Stats</span>
             </p>
           </a>
-        </li>
+        </li> -->
         <!-- Notifications dropdown -->
         <li class="nav-item dropdown">
           <a class="nav-link" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -52,6 +51,7 @@
         <!-- User dropdown -->
         <li class="nav-item dropdown">
           <a class="nav-link" href="" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            {{ auth.currentUser().name }}
             <i class="material-icons">person</i>
             <p class="d-lg-none d-md-block">
               Account
@@ -61,11 +61,10 @@
             <a class="dropdown-item" href="#">Profile</a>
             <a class="dropdown-item" href="#">Settings</a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Log out</a>
+            <a class="dropdown-item" (click)="auth.logout()" href="">Log out</a>
           </div>
         </li>
       </ul>
     </div>
   </div>
 </nav>
-<!-- End Navbar -->

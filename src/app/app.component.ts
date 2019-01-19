@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ToastrModule } from 'ng6-toastr-notifications';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +8,5 @@ import { ToastrModule } from 'ng6-toastr-notifications';
 })
 export class AppComponent {
   title = 'Track it!';
+  constructor(private auth: AuthService){ }
 }

@@ -1,9 +1,16 @@
-<div class="wrapper">
+<div *ngIf="auth.currentUser(); else notLoggedTemplate" class="wrapper">
+  <!-- Sidebar -->
   <app-sidebar></app-sidebar>
+  <!-- End Sidebar -->
   <div class="main-panel">
+  	<!-- Navbar -->
     <app-navbar></app-navbar>
+    <!-- End Navbar -->
     <div class="content">
       <router-outlet></router-outlet>
     </div>
   </div>
 </div>
+<ng-template #notLoggedTemplate>
+	<router-outlet></router-outlet>
+</ng-template>

@@ -12,13 +12,12 @@ import { TranslationsService } from '../services/translations.service';
 export class HomeComponent implements OnInit {
   constructor(private auth: AuthService, private router: Router, 
     private notify: NotificationsService, private trans: TranslationsService) {
-  	// notify.showSuccess();
     console.log(this.auth.currentUser());
+  	// notify.showSuccess();
   }
   
-  ngOnInit() { }
-
-  login(){
-  	this.router.navigate(['/']);
+  ngOnInit() {
+    if(this.auth.currentUser()) this.router.navigate(['/dashboard']);
   }
+
 }

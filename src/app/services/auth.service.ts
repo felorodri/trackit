@@ -15,26 +15,22 @@ import { EncryptionService } from '../services/encryption.service';
 @Injectable()
 
 export class AuthService {
-	private appUser: User;
+  private appUser: User;
   private user: Observable<firebase.User>;
   private userData: firebase.User = null;
   private token = null;
 
-  constructor (private afAuth: AngularFireAuth, private router: Router, private zone: NgZone, private enc: EncryptionService) { 
+  constructor (private afAuth: AngularFireAuth, private router: Router, private zone: NgZone, private enc: EncryptionService) {
     if (sessionStorage.getItem('user') && sessionStorage.getItem('token')) {
-      this.appUser = JSON.parse(enc.decrypt(sessionStorage.getItem('token'), sessionStorage.getItem('user')));
-    }else{
-      this.user = this.afAuth.authState; 
+      const storedData = JSON.parse(enc.decrypt(sessionStorage.getItem('token'), sessionStorage.getItem('user')));
+      this.appUser = new User(storedData.name, storedData.email, storedData.metadata, storedData.language);
+    } else {
+      this.user = this.afAuth.authState;
       this.user.subscribe(
         (user) => {
           if (user) {
             this.userData = user;
-            this.appUser = {
-              name: this.userData.displayName,
-              email: this.userData.email,
-              metadata: this.userData,
-              language: 'es'
-            };
+            this.appUser = new User(this.userData.displayName, this.userData.email, this.userData, 'es');
             sessionStorage.setItem('user', enc.encrypt(this.userData['refreshToken'], JSON.stringify(this.appUser)));
             sessionStorage.setItem('token', this.userData['refreshToken']);
           } else {
@@ -70,7 +66,7 @@ export class AuthService {
   // This method execute the Google provider login popup
   googleLogin() {
     const provider = new auth.GoogleAuthProvider();
-    return this.afAuth.auth.signInWithPopup(provider).then(()=>{
+    return this.afAuth.auth.signInWithPopup(provider).then(() => {
       this.zone.run(() => { this.router.navigate(['/home']); });
     });
   }
@@ -81,7 +77,7 @@ export class AuthService {
       this.userData = null;
       sessionStorage.removeItem('user');
       sessionStorage.removeItem('token');
-      this.router.navigate(['/']);
+      this.router.navigate(['']);
     });
   }
 
@@ -90,9 +86,9 @@ export class AuthService {
   //   return this.afAuth.auth.signInWithPopup(provider);
   // }
 
-  // This method returns the current user info. 
+  // This method returns the current user info.
   currentUser() {
-  	return this.appUser;
+    return this.appUser;
   }
 }
 

@@ -4,8 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { TranslationsService } from '../../services/translations.service';
 
 declare const $: any;
-
-export var MenuItems: any[];
+export let MenuItems: any[];
 
 @Component({
   selector: 'app-sidebar',
@@ -16,17 +15,17 @@ export var MenuItems: any[];
 export class SidebarComponent implements OnInit {
   allRoutes: any[];
   menuItems = [];
-  constructor(private router: Router, private auth: AuthService, 
-    private trans: TranslationsService){
+  constructor(private router: Router, private auth: AuthService,
+    private trans: TranslationsService) {
     this.allRoutes = this.router.config;
   }
   ngOnInit() {
-    for (var i = 0; i< this.allRoutes.length; i++) {
-      if (this.allRoutes[i].data && 
-      this.allRoutes[i].data.sidebar && 
-      this.allRoutes[i].data.sidebar == true) {
+    for (let i = 0; i < this.allRoutes.length; i++) {
+      if (this.allRoutes[i].data &&
+      this.allRoutes[i].data.sidebar &&
+      this.allRoutes[i].data.sidebar === true) {
         this.menuItems.push(this.allRoutes[i]);
-      }      
+      }
     }
     MenuItems = this.menuItems;
   }
@@ -35,5 +34,5 @@ export class SidebarComponent implements OnInit {
       return false;
     }
     return true;
-  };
+  }
 }

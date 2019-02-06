@@ -35,7 +35,7 @@ import { environment } from '../environments/environment';
   ],
   imports: [
     BrowserModule,
-    BrowserAnimationsModule, 
+    BrowserAnimationsModule,
     ToastrModule.forRoot(),
     AppRoutingModule,
     UicomponentsModule,
@@ -52,6 +52,6 @@ import { environment } from '../environments/environment';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { 
-  constructor (private auth: AuthService, private trans: TranslationsService){ }
+export class AppModule {
+  constructor (private auth: AuthService, private trans: TranslationsService) { }
 }

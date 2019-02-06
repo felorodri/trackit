@@ -12,9 +12,9 @@ import { FooterComponent } from './footer/footer.component';
     RouterModule
   ],
   exports: [
-  	NavbarComponent,
-  	SidebarComponent,
-  	FooterComponent
+    NavbarComponent,
+    SidebarComponent,
+    FooterComponent
   ]
 })
 export class UicomponentsModule { }

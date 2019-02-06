@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <!-- Page name according to user language option -->
     <div class="navbar-wrapper">
-      <a class="navbar-brand">{{trans.getLanguageBase()[auth.currentUser().language][pageName]}}</a>
+      <a class="navbar-brand">{{trans.getLanguageBase()[auth.currentUser().getLanguage()][pageName]}}</a>
     </div>
     <!-- Sidebar toggle button for responsive sidebar when it is collapsed -->
     <button mat-raised-button class="navbar-toggler" type="button" (click)="sidebarToggle()">
@@ -51,7 +51,7 @@
         <!-- User dropdown -->
         <li class="nav-item dropdown">
           <a class="nav-link" href="" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{ auth.currentUser().name }}
+            {{ auth.currentUser().getName() }}
             <i class="material-icons">person</i>
             <p class="d-lg-none d-md-block">
               Account

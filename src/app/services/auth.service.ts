@@ -23,6 +23,7 @@ export class AuthService {
   constructor (private afAuth: AngularFireAuth, private router: Router, private zone: NgZone, private enc: EncryptionService) {
     if (sessionStorage.getItem('user') && sessionStorage.getItem('token')) {
       const storedData = JSON.parse(enc.decrypt(sessionStorage.getItem('token'), sessionStorage.getItem('user')));
+      console.log(storedData);
       this.appUser = new User(storedData.name, storedData.email, storedData.metadata, storedData.language);
     } else {
       this.user = this.afAuth.authState;

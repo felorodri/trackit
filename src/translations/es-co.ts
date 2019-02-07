@@ -5,6 +5,6 @@
 */
 // Translations definitions and object exportation
 export const esCo = {
-	'Dashboard': 'Panel principal',
+  'Dashboard': 'Panel principal',
   'User Profile': 'Perfil de usuario'
 };

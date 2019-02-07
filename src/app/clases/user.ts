@@ -18,4 +18,7 @@ export class User {
   getLanguage(): any {
     return this.language;
   }
+  getMetaData(): any {
+    return this.metadata;
+  }
 }

@@ -51,17 +51,32 @@
         <!-- User dropdown -->
         <li class="nav-item dropdown">
           <a class="nav-link" href="" id="navbarDropdownProfile" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {{ auth.currentUser().getName() }}
-            <i class="material-icons">person</i>
+            <div *ngIf="!auth.currentUser().getMetaData().photoURL && auth.currentUser().getMetaData().photoURL!='';else photo">
+              <i class="material-icons">person</i>
+            </div>
+            <ng-template #photo>
+              <img src="{{auth.currentUser().getMetaData().photoURL}}" alt="Profile photo" class="profile-photo">
+            </ng-template>
             <p class="d-lg-none d-md-block">
               Account
             </p>
           </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownProfile">
-            <a class="dropdown-item" href="#">Profile</a>
-            <a class="dropdown-item" href="#">Settings</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" (click)="auth.logout()" href="">Log out</a>
+          <div class="dropdown-menu dropdown-menu-right customized" aria-labelledby="navbarDropdownProfile">
+            <div>
+              <div class="dropdown-user-info">
+                <div class="user-name">
+                  {{ auth.currentUser().getName() }}
+                  <div class="user-email">
+                    {{ auth.currentUser().getEmail() }}
+                  </div>
+                </div>
+              </div>
+              <div class="dropdown-divider no-margin-top"></div>
+              <a class="dropdown-item" href="#">Profile</a>
+              <a class="dropdown-item" href="#">Settings</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" (click)="auth.logout()" href="">Log out</a>
+            </div>
           </div>
         </li>
       </ul>

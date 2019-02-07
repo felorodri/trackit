@@ -13,7 +13,7 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
-  }, 
+  },
   {
     path: 'home',
     redirectTo: '',
@@ -32,7 +32,7 @@ const routes: Routes = [
     path: 'profile',
     component: ProfileComponent,
     data: {
-      sidebar: true,
+      sidebar: false,
       title: 'User Profile',
       icon: 'person'
     }

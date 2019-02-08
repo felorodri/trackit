@@ -15,8 +15,7 @@ export let MenuItems: any[];
 export class SidebarComponent implements OnInit {
   allRoutes: any[];
   menuItems = [];
-  constructor(private router: Router, private auth: AuthService,
-    private trans: TranslationsService) {
+  constructor(private router: Router, public auth: AuthService, public trans: TranslationsService) {
     this.allRoutes = this.router.config;
   }
   ngOnInit() {

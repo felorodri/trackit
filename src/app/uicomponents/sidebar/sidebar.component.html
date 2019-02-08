@@ -47,7 +47,7 @@
         <li class="nav-item" routerLinkActive="active" *ngFor="let menuItem of menuItems">
           <a class="nav-link" [routerLink]="[menuItem.path]">
             <i class="material-icons">{{menuItem.data.icon}}</i>
-            <p>{{trans.getLanguageBase()[auth.currentUser().language][menuItem.data.title]}}</p>
+            <p>{{trans.getLanguageBase()[auth.currentUser().getLanguage()][menuItem.data.title]}}</p>
           </a>
         </li>
     </ul>

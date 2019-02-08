@@ -72,7 +72,7 @@ export class AuthService {
     });
   }
 
-  logout() {
+  logout(): void {
     this.afAuth.auth.signOut().then(() => {
       this.appUser = null;
       this.userData = null;
@@ -88,8 +88,17 @@ export class AuthService {
   // }
 
   // This method returns the current user info.
-  currentUser() {
+  currentUser(): User {
     return this.appUser;
+  }
+
+  // This method returns the current user info.
+  isAuthenticated(): boolean {
+    if (this.appUser) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
 

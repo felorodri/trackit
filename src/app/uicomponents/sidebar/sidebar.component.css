@@ -1,0 +1,13 @@
+.profile-photo {
+  width: 2.5rem;
+  border-radius: 30px
+}
+
+.user-name {
+  padding-left: 3.2rem
+}
+
+.user-email {
+  text-transform: none;
+  font-size: 0.8rem
+}

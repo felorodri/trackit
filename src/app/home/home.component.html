@@ -1,12 +1,9 @@
-<p>
-  home works!
-</p>
 
 <div *ngIf="auth.currentUser() as user; else showLogin">
   <h1>Hello {{ user.name }}!</h1>
   <button (click)="auth.logout()">Logout</button>
 </div>
 <ng-template #showLogin>
-  <!-- <a routerLink="/login">Please login.</a> -->
+  <a routerLink="/login">Please login.</a>
   <button (click)="router.navigate(['/login'])">Login</button>
 </ng-template>

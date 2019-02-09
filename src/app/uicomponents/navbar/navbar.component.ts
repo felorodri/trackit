@@ -3,7 +3,7 @@ import { AuthService } from '../../services/auth.service';
 import { TranslationsService } from '../../services/translations.service';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import { Router } from '@angular/router';
-import { MenuItems } from '../sidebar/sidebar.component';
+import { AppRoutes } from '../sidebar/sidebar.component';
 
 @Component({
   selector: 'app-navbar',
@@ -25,7 +25,7 @@ export class NavbarComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.listTitles = MenuItems;
+    this.listTitles = AppRoutes;
     const navbar: HTMLElement = this.element.nativeElement;
     this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
     this.router.events.subscribe((event) => {

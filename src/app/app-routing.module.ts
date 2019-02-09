@@ -36,7 +36,7 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: {
       sidebar: false,
-      title: 'User Profile',
+      title: 'UserProfile',
       icon: 'person'
     }
   },

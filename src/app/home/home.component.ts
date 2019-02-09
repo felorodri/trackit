@@ -18,7 +18,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     if (this.auth.currentUser()) {
       this.router.navigate(['/dashboard']);
-      console.log(this.auth.currentUser().getName());
     }
   }
 

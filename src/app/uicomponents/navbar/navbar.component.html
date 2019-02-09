@@ -2,7 +2,7 @@
   <div class="container-fluid">
     <!-- Page name according to user language option -->
     <div class="navbar-wrapper">
-      <a class="navbar-brand">{{trans.getLanguageBase()[auth.currentUser().getLanguage()][pageName]}}</a>
+      <a class="navbar-brand">{{ trans.getLanguageBase()[auth.currentUser().getLanguage()][pageName] }}</a>
     </div>
     <!-- Sidebar toggle button for responsive sidebar when it is collapsed -->
     <button mat-raised-button class="navbar-toggler" type="button" (click)="sidebarToggle()">
@@ -55,28 +55,25 @@
               <i class="material-icons">person</i>
             </div>
             <ng-template #photo>
-              <img src="{{auth.currentUser().getMetaData().photoURL}}" alt="Profile photo" class="profile-photo">
+              <img src="{{ auth.currentUser().getMetaData().photoURL }}" alt="Profile photo" class="profile-photo">
             </ng-template>
             <!-- <p class="d-lg-none d-md-block">
               Account
             </p> -->
           </a>
           <div class="dropdown-menu dropdown-menu-right customized" aria-labelledby="navbarDropdownProfile">
-            <div>
-              <div class="dropdown-user-info">
-                <div class="user-name">
-                  {{ auth.currentUser().getName() }}
-                  <div class="user-email">
-                    {{ auth.currentUser().getEmail() }}
-                  </div>
+            <div class="dropdown-user-info">
+              <div class="user-name">
+                {{ auth.currentUser().getName() }}
+                <div class="user-email">
+                  {{ auth.currentUser().getEmail() }}
                 </div>
               </div>
-              <div class="dropdown-divider no-margin-top"></div>
-              <a class="dropdown-item" href="#">Profile</a>
-              <a class="dropdown-item" href="#">Settings</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" (click)="auth.logout(); false" href="#">Log out</a>
             </div>
+            <div class="dropdown-divider no-margin-top"></div>
+            <a class="dropdown-item" [routerLink]="['profile']">{{ trans.getLanguageBase()[auth.currentUser().getLanguage()]['AccountSettings'] }}</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" (click)="auth.logout(); false" href="#">{{ trans.getLanguageBase()[auth.currentUser().getLanguage()]['LogOut'] }}</a>
           </div>
         </li>
       </ul>

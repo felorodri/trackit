@@ -11,3 +11,7 @@
   text-transform: none;
   font-size: 0.8rem
 }
+
+.dropdown-item.mobile {
+  text-transform: none !important;
+}

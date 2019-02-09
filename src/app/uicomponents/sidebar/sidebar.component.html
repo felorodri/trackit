@@ -9,62 +9,55 @@
   <div class="sidebar-wrapper">
     <div *ngIf="isMobileMenu()">
       <ul class="nav navbar-nav nav-mobile-menu">
-          <!-- <li class="nav-item">
-              <a class="nav-link" href="#pablo">
-                  <i class="material-icons">dashboard</i>
-                  <p>
-                    <span class="d-lg-none d-md-block">Stats</span>
-                  </p>
-              </a>
-          </li> -->
-          <!-- Account options -->
-          <li class="nav-item dropdown">
-              <a class="nav-link" href="#" id="navbarDropdownMenuUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <div *ngIf="!auth.currentUser().getMetaData().photoURL && auth.currentUser().getMetaData().photoURL!='';else photo">
-                  <i class="material-icons">person</i>
-                </div>
-                <ng-template #photo>
-                  <img src="{{auth.currentUser().getMetaData().photoURL}}" alt="Profile photo" class="profile-photo float-left">
-                </ng-template>
-                <div class="user-name">
-                  {{ auth.currentUser().getName() }}
-                  <div class="user-email">
-                    {{ auth.currentUser().getEmail() }}
-                  </div>
-                </div>
-              </a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuUser">
-                  <a class="dropdown-item" href="#">Profile</a>
-                  <a class="dropdown-item" href="#">Settings</a>
-                  <a class="dropdown-item" (click)="auth.logout(); false" href="#">Log out</a>
+        <!-- Account options -->
+        <li class="nav-item dropdown">
+          <a class="nav-link" href="#" id="navbarDropdownMenuUser" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div *ngIf="!auth.currentUser().getMetaData().photoURL && auth.currentUser().getMetaData().photoURL!='';else photo">
+              <i class="material-icons">person</i>
+            </div>
+            <ng-template #photo>
+              <img src="{{ auth.currentUser().getMetaData().photoURL }}" alt="Profile photo" class="profile-photo float-left">
+            </ng-template>
+            <div class="user-name">
+              {{ auth.currentUser().getName() }}
+              <div class="user-email">
+                {{ auth.currentUser().getEmail() }}
               </div>
-          </li>
-          <!-- Notifications dropdown -->
-          <li class="nav-item dropdown">
-              <a class="nav-link" href="#pablo" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="material-icons">notifications</i>
-                  <span class="notification">5</span>
-                  <p>
-                      <span class="d-lg-none d-md-block">Some Actions</span>
-                  </p>
-              </a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                  <a class="dropdown-item" href="#">Mike John responded to your email</a>
-                  <a class="dropdown-item" href="#">You have 5 new tasks</a>
-                  <a class="dropdown-item" href="#">You're now friend with Andrew</a>
-                  <a class="dropdown-item" href="#">Another Notification</a>
-                  <a class="dropdown-item" href="#">Another One</a>
-              </div>
-          </li>
+            </div>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuUser">
+            <a class="dropdown-item mobile" [routerLink]="['profile']">{{ trans.getLanguageBase()[auth.currentUser().getLanguage()]['AccountSettings'] }}</a>
+            <a class="dropdown-item mobile" (click)="auth.logout(); false" href="#">{{ trans.getLanguageBase()[auth.currentUser().getLanguage()]['LogOut'] }}</a>
+          </div>
+        </li>
+        <!-- Notifications dropdown -->
+        <li class="nav-item dropdown">
+          <a class="nav-link" href="#pablo" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="material-icons">notifications</i>
+            <span class="notification">5</span>
+            <p>
+              <span class="d-lg-none d-md-block">Some Actions</span>
+            </p>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" href="#">Mike John responded to your email</a>
+            <a class="dropdown-item" href="#">You have 5 new tasks</a>
+            <a class="dropdown-item" href="#">You're now friend with Andrew</a>
+            <a class="dropdown-item" href="#">Another Notification</a>
+            <a class="dropdown-item" href="#">Another One</a>
+          </div>
+        </li>
       </ul>
     </div>
     <ul class="nav">
-        <li class="nav-item" routerLinkActive="active" *ngFor="let menuItem of menuItems">
+      <div *ngFor="let menuItem of inAppRoutes">
+        <li class="nav-item" routerLinkActive="active"  *ngIf="menuItem.data.sidebar">
           <a class="nav-link" [routerLink]="[menuItem.path]">
-            <i class="material-icons">{{menuItem.data.icon}}</i>
-            <p>{{trans.getLanguageBase()[auth.currentUser().getLanguage()][menuItem.data.title]}}</p>
+            <i class="material-icons">{{ menuItem.data.icon }}</i>
+            <p>{{ trans.getLanguageBase()[auth.currentUser().getLanguage()][menuItem.data.title] }}</p>
           </a>
         </li>
+      </div>
     </ul>
   </div>
   <div class="sidebar-background" style="background-image: url(assets/img/sidebar-4.jpg)"></div>

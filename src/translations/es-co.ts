@@ -5,6 +5,8 @@
 */
 // Translations definitions and object exportation
 export const esCo = {
+  'AccountSettings': 'Ajustes de cuenta',
   'Dashboard': 'Panel principal',
-  'User Profile': 'Perfil de usuario'
+  'LogOut': 'Salir',
+  'UserProfile': 'Perfil de usuario'
 };

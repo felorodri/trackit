@@ -4,7 +4,7 @@ import { AuthService } from '../../services/auth.service';
 import { TranslationsService } from '../../services/translations.service';
 
 declare const $: any;
-export let MenuItems: any[];
+export let AppRoutes: any[];
 
 @Component({
   selector: 'app-sidebar',
@@ -14,19 +14,17 @@ export let MenuItems: any[];
 
 export class SidebarComponent implements OnInit {
   allRoutes: any[];
-  menuItems = [];
+  inAppRoutes = [];
   constructor(private router: Router, public auth: AuthService, public trans: TranslationsService) {
     this.allRoutes = this.router.config;
   }
   ngOnInit() {
     for (let i = 0; i < this.allRoutes.length; i++) {
-      if (this.allRoutes[i].data &&
-      this.allRoutes[i].data.sidebar &&
-      this.allRoutes[i].data.sidebar === true) {
-        this.menuItems.push(this.allRoutes[i]);
+      if (this.allRoutes[i].data) {
+        this.inAppRoutes.push(this.allRoutes[i]);
       }
     }
-    MenuItems = this.menuItems;
+    AppRoutes = this.inAppRoutes;
   }
   isMobileMenu() {
     if ($(window).width() > 991) {

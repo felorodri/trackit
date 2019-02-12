@@ -96,6 +96,7 @@ export class AuthService {
         this.notify.showSuccess();
       }).catch(function(error) {
         const errorMessage = error.message;
+        this.notify.showError();
         console.log(error);
       });
     }
@@ -114,6 +115,7 @@ export class AuthService {
       const errorMessage = error.message;
       const email = error.email;
       const credential = error.credential;
+      this.notify.showError();
       console.log(errorMessage);
     });
   }

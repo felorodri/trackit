@@ -18,7 +18,7 @@ export class NotificationsService {
   }
 
   showError() {
-    this.toastr.errorToastr('This is error toast.', 'Oops!');
+    this.toastr.errorToastr('This is error toast.', 'Oops!', {position: 'bottom-right'});
   }
 
   showWarning() {

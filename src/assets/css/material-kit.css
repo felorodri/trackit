@@ -15,7 +15,7 @@
 
 /*     brand Colors              */
 
-.carousel.carousel-full-nagivation .left {
+/* .carousel.carousel-full-nagivation .left {
   cursor: url("../../img/arrow-left.png"), url("../../img/arrow-left.cur"), default !important;
 }
 
@@ -25,7 +25,7 @@
 
 .card {
   font-size: .875rem;
-}
+} */
 
 *,
 *::before,
@@ -16133,7 +16133,7 @@ fieldset[disabled] .form-group.is-focused .togglebutton label {
   background: none;
 }
 
-.purple-filter:after {
+.black-filter:after {
   background: rgba(0,0,0,.62);
   background: linear-gradient(45deg, rgba(0,0,0,.62) 0%, rgba(0,0,0,.62) 100%);
   background: -moz-linear-gradient(135deg, rgba(0,0,0,.62) 0%, rgba(0,0,0,.62) 100%);

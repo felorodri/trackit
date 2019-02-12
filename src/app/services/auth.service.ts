@@ -70,30 +70,18 @@ export class AuthService {
   googleLogin() {
     const provider = new auth.GoogleAuthProvider();
     return this.oAuthLogin(provider);
-    // return this.afAuth.auth.signInWithPopup(provider).then(() => {
-    //   this.zone.run(() => {
-    //     this.notify.showSuccess();
-    //     this.router.navigate(['/home']);
-    //   });
-    // }).catch(function(error) {
-    //   const errorCode = error.code;
-    //   const errorMessage = error.message;
-    //   const email = error.email;
-    //   const credential = error.credential;
-    //   console.log(errorMessage);
-    // });
   }
 
   // This method is executed to logout the user from the app
   logout(): void {
-    if(this.isAuthenticated){
+    if (this.isAuthenticated) {
       this.afAuth.auth.signOut().then(() => {
         this.appUser = null;
         this.userData = null;
         sessionStorage.removeItem('user');
         sessionStorage.removeItem('token');
         this.router.navigate(['']);
-        this.notify.showSuccess();
+        // this.notify.showSuccess();
       }).catch(function(error) {
         const errorMessage = error.message;
         this.notify.showError();
@@ -103,7 +91,7 @@ export class AuthService {
   }
 
   // This method execute the signin popup from a given selected provider.
-  private oAuthLogin(provider) {
+  private async oAuthLogin(provider) {
     // return this.afAuth.auth.signInWithPopup(provider);
     return this.afAuth.auth.signInWithPopup(provider).then(() => {
       this.zone.run(() => {

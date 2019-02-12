@@ -10,7 +10,7 @@ import { TranslationsService } from '../services/translations.service';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-  constructor(private auth: AuthService, private router: Router,
+  constructor(public auth: AuthService, public router: Router,
     private notify: NotificationsService, private trans: TranslationsService) {
     // notify.showSuccess();
   }

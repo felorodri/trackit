@@ -11,6 +11,7 @@ import { User } from '../clases/user';
 import { Observable } from 'rxjs';
 import { NgZone } from '@angular/core';
 import { EncryptionService } from '../services/encryption.service';
+import { NotificationsService } from '../services/notifications.service';
 
 @Injectable()
 
@@ -20,7 +21,8 @@ export class AuthService {
   private userData: firebase.User = null;
   private token = null;
 
-  constructor (private afAuth: AngularFireAuth, private router: Router, private zone: NgZone, private enc: EncryptionService) {
+  constructor (private afAuth: AngularFireAuth, private router: Router, private zone: NgZone,
+  private enc: EncryptionService, private notify: NotificationsService) {
     if (sessionStorage.getItem('user') && sessionStorage.getItem('token')) {
       const storedData = JSON.parse(enc.decrypt(sessionStorage.getItem('token'), sessionStorage.getItem('user')));
       console.log(storedData);
@@ -64,28 +66,57 @@ export class AuthService {
   //     });
   // }
 
-  // This method execute the Google provider login popup
+  // This method create the Google provider
   googleLogin() {
     const provider = new auth.GoogleAuthProvider();
-    return this.afAuth.auth.signInWithPopup(provider).then(() => {
-      this.zone.run(() => { this.router.navigate(['/home']); });
-    });
+    return this.oAuthLogin(provider);
+    // return this.afAuth.auth.signInWithPopup(provider).then(() => {
+    //   this.zone.run(() => {
+    //     this.notify.showSuccess();
+    //     this.router.navigate(['/home']);
+    //   });
+    // }).catch(function(error) {
+    //   const errorCode = error.code;
+    //   const errorMessage = error.message;
+    //   const email = error.email;
+    //   const credential = error.credential;
+    //   console.log(errorMessage);
+    // });
   }
 
+  // This method is executed to logout the user from the app
   logout(): void {
-    this.afAuth.auth.signOut().then(() => {
-      this.appUser = null;
-      this.userData = null;
-      sessionStorage.removeItem('user');
-      sessionStorage.removeItem('token');
-      this.router.navigate(['']);
-    });
+    if(this.isAuthenticated){
+      this.afAuth.auth.signOut().then(() => {
+        this.appUser = null;
+        this.userData = null;
+        sessionStorage.removeItem('user');
+        sessionStorage.removeItem('token');
+        this.router.navigate(['']);
+        this.notify.showSuccess();
+      }).catch(function(error) {
+        const errorMessage = error.message;
+        console.log(error);
+      });
+    }
   }
 
-  // This method execute the signin popup from the selected provider.
-  // private oAuthLogin(provider) {
-  //   return this.afAuth.auth.signInWithPopup(provider);
-  // }
+  // This method execute the signin popup from a given selected provider.
+  private oAuthLogin(provider) {
+    // return this.afAuth.auth.signInWithPopup(provider);
+    return this.afAuth.auth.signInWithPopup(provider).then(() => {
+      this.zone.run(() => {
+        this.notify.showSuccess();
+        this.router.navigate(['/home']);
+      });
+    }).catch(function(error) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      const email = error.email;
+      const credential = error.credential;
+      console.log(errorMessage);
+    });
+  }
 
   // This method returns the current user info.
   currentUser(): User {

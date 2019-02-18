@@ -10,10 +10,12 @@ import { AppRoutes } from '../sidebar/sidebar.component';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
+
 export class NavbarComponent implements OnInit {
+
   private listTitles: any[];
-  location: Location;
-  mobile_menu_visible: any = 0;
+  public location: Location;
+  public mobile_menu_visible: any = 0;
   private toggleButton: any;
   private sidebarVisible: boolean;
   public pageName: string;

@@ -9,10 +9,15 @@ import { TranslationsService } from '../services/translations.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
+
 export class HomeComponent implements OnInit {
+
+  public currentDate: Date;
+
   constructor(public auth: AuthService, public router: Router,
     private notify: NotificationsService, private trans: TranslationsService) {
     // notify.showSuccess();
+    this.currentDate = new Date();
   }
 
   ngOnInit() {

@@ -17,3 +17,17 @@
     background-attachment: scroll;
   }
 }
+
+.footer .copyright {
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.footer a {
+  color: #6c757d;
+  font-weight: bold
+}
+
+.main-raised {
+  margin: -30px 25px 0px;
+}

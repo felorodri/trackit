@@ -3,43 +3,35 @@
 .home-section {
   min-height: 100vh;
 }
-
 .parallax {
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
 }
-
+.footer .copyright {
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+.footer a {
+  color: #6c757d;
+  font-weight: bold
+}
+.main-raised {
+  margin: -30px 25px 0px;
+}
+.navbar-collapse {
+  opacity: 0.95;
+}
 @media only screen and (max-device-width: 1366px) {
   .parallax {
     background-attachment: scroll;
   }
 }
-
-.footer .copyright {
-  font-size: 0.9rem;
-  color: #6c757d;
-}
-
-.footer a {
-  color: #6c757d;
-  font-weight: bold
-}
-
-.main-raised {
-  margin: -30px 25px 0px;
-}
-
-.navbar-collapse {
-  opacity: 0.95;
-}
-
 @media all and (max-width: 991px){
   .home .navbar .navbar-collapse.collapse {
     display: block !important;
   }
-
   .navbar .container {
     -webkit-transform: none;
     -moz-transform: none;
@@ -47,7 +39,6 @@
     -ms-transform: none;
     transform: none;
   }
-
   .nav-open .navbar .container .navbar-toggler {
     -webkit-transform: none;
     -moz-transform: none;
@@ -55,15 +46,23 @@
     -ms-transform: none;
     transform: none;
   }
-
   .nav-open .navbar-collapse.collapse {
     box-shadow: -10px 4px 18px 0px rgba(0, 0, 0, 0.12)
   }
-
   .navbar-nav {
     margin-top: 10px;
   }
-
+  .home ::ng-deep #homeBodyClick {
+    height: 100% !important;
+    width: 100% !important;
+    position: fixed !important;
+    opacity: 0 !important;
+    top: 0 !important;
+    left: auto !important;
+    right: 230px !important;
+    content: "" !important;
+    z-index: 1029 !important;
+    overflow-x: hidden !important;
+  }
 }
-
 

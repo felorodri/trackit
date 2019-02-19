@@ -55,7 +55,6 @@ $(document).ready(function() {
 
 $(document).on('click', '.navbar-toggler', function() {
   $toggle = $(this);
-
   if (materialKit.misc.navbar_menu_visible == 1) {
     $('.home').removeClass('nav-open');
     materialKit.misc.navbar_menu_visible = 0;
@@ -63,18 +62,14 @@ $(document).on('click', '.navbar-toggler', function() {
     setTimeout(function() {
       $toggle.removeClass('toggled');
     }, 550);
-
     $('.home').removeClass('nav-open-absolute');
   } else {
     setTimeout(function() {
       $toggle.addClass('toggled');
     }, 580);
-
-
     div = '<div id="homeBodyClick"></div>';
-    $(div).appendTo("body").click(function() {
+    $(div).appendTo(".home").click(function() {
       $('.home').removeClass('nav-open');
-
       if ($('nav').hasClass('navbar-absolute')) {
         $('.home').removeClass('nav-open-absolute');
       }
@@ -84,11 +79,9 @@ $(document).on('click', '.navbar-toggler', function() {
         $toggle.removeClass('toggled');
       }, 550);
     });
-
     if ($('nav').hasClass('navbar-absolute')) {
       $('.home').addClass('nav-open-absolute');
     }
-
     $('.home').addClass('nav-open');
     materialKit.misc.navbar_menu_visible = 1;
   }

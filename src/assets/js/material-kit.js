@@ -59,7 +59,7 @@ $(document).on('click', '.navbar-toggler', function() {
   if (materialKit.misc.navbar_menu_visible == 1) {
     $('html').removeClass('nav-open');
     materialKit.misc.navbar_menu_visible = 0;
-    $('#bodyClick').remove();
+    $('#homeBodyClick').remove();
     setTimeout(function() {
       $toggle.removeClass('toggled');
     }, 550);
@@ -71,7 +71,7 @@ $(document).on('click', '.navbar-toggler', function() {
     }, 580);
 
 
-    div = '<div id="bodyClick"></div>';
+    div = '<div id="homeBodyClick"></div>';
     $(div).appendTo("body").click(function() {
       $('html').removeClass('nav-open');
 
@@ -79,7 +79,7 @@ $(document).on('click', '.navbar-toggler', function() {
         $('html').removeClass('nav-open-absolute');
       }
       materialKit.misc.navbar_menu_visible = 0;
-      $('#bodyClick').remove();
+      $('#homeBodyClick').remove();
       setTimeout(function() {
         $toggle.removeClass('toggled');
       }, 550);

@@ -5,7 +5,6 @@
 }
 
 .parallax {
-  /* height: 100%; */
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
@@ -31,3 +30,25 @@
 .main-raised {
   margin: -30px 25px 0px;
 }
+
+@media all and (max-width: 991px){
+  .home .navbar .container,
+  .home .navbar .container .navbar-toggler {
+    -webkit-transform: translate3d(0px, 0, 0) !important;
+    -moz-transform: translate3d(0px, 0, 0) !important;
+    -o-transform: translate3d(0px, 0, 0) !important;
+    -ms-transform: translate3d(0px, 0, 0) !important;
+    transform: translate3d(0px, 0, 0) !important;
+  }
+
+  .home .navbar-collapse {
+    -webkit-transform: translate3d(0px, 0, 0) !important;
+    -moz-transform: translate3d(0px, 0, 0) !important;
+    -o-transform: translate3d(0px, 0, 0) !important;
+    -ms-transform: translate3d(0px, 0, 0) !important;
+    transform: translate3d(0px, 0, 0) !important;
+  }
+
+}
+
+

@@ -11,11 +11,19 @@ import { TranslationsService } from '../services/translations.service';
 })
 
 export class HomeComponent implements OnInit {
-
   public currentDate: Date;
+  private materialKit = {
+    misc: {
+      navbar_menu_visible: 0,
+      window_width: 0,
+      transparent: true,
+      fixedTop: false,
+      navbar_initialized: false
+    }
+  };
 
-  constructor(public auth: AuthService, public router: Router,
-    private notify: NotificationsService, private trans: TranslationsService) {
+  constructor( public auth: AuthService, public router: Router, private notify: NotificationsService,
+  private trans: TranslationsService) {
     // notify.showSuccess();
     this.currentDate = new Date();
   }

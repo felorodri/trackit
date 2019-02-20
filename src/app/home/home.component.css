@@ -52,6 +52,9 @@
   .navbar-nav {
     margin-top: 10px;
   }
+  .login-btn-collapsed{
+    margin: 15px !important;
+  }
   .home ::ng-deep #homeBodyClick {
     height: 100% !important;
     width: 100% !important;

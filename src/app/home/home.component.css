@@ -23,6 +23,9 @@
 .navbar-collapse {
   opacity: 0.95;
 }
+.footer-icon {
+  font-size: 1.5rem !important;
+}
 @media only screen and (max-device-width: 1366px) {
   .parallax {
     background-attachment: scroll;
@@ -66,6 +69,13 @@
     content: "" !important;
     z-index: 1029 !important;
     overflow-x: hidden !important;
+  }
+  .footer .container .float-left {
+    float: none !important;
+  }
+  .footer .container .float-right {
+    float: none !important;
+    width: 100%;
   }
 }
 

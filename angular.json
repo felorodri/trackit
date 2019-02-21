@@ -29,8 +29,7 @@
               "./node_modules/crypto-js/crypto-js.js",
               "./node_modules/jquery/dist/jquery.min.js",
               "./node_modules/popper.js/dist/umd/popper.js",
-              "./node_modules/bootstrap-material-design/dist/js/bootstrap-material-design.min.js",
-              "./src/assets/js/material-kit.js"
+              "./node_modules/bootstrap-material-design/dist/js/bootstrap-material-design.min.js"
             ]
           },
           "configurations": {

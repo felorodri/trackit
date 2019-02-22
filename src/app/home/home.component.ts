@@ -41,120 +41,6 @@ export class HomeComponent implements OnInit {
        * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
        */
       let big_image;
-      $(document).ready(function() {
-        BrowserDetect.init();
-        // Init Material scripts for buttons ripples, inputs animations etc, more info on the next link
-        // https://github.com/FezVrasta/bootstrap-material-design#materialjs
-        $('body').bootstrapMaterialDesign();
-        const window_width = $(window).width();
-        const $navbar = $('.navbar[color-on-scroll]');
-        const scroll_distance = $navbar.attr('color-on-scroll') || 500;
-        const $navbar_collapse = $('.navbar').find('.navbar-collapse');
-        //  Activate the Tooltips
-        $('[data-toggle="tooltip"], [rel="tooltip"]').tooltip();
-        // Activate Popovers
-        $('[data-toggle="popover"]').popover();
-        if ($('.navbar-color-on-scroll').length != 0) {
-          $(window).on('scroll', materialKit.checkScrollForTransparentNavbar);
-        }
-        materialKit.checkScrollForTransparentNavbar();
-        if (window_width >= 768) {
-          big_image = $('.page-header[data-parallax="true"]');
-          if (big_image.length !== 0) {
-            $(window).on('scroll', materialKit.checkScrollForParallax);
-          }
-        }
-      });
-      $(document).on('click', '.navbar-toggler', function() {
-        const $toggle = $(this);
-        if (materialKit.misc.navbar_menu_visible == 1) {
-          $('.home').removeClass('nav-open');
-          materialKit.misc.navbar_menu_visible = 0;
-          $('#homeBodyClick').remove();
-          setTimeout(function() {
-            $toggle.removeClass('toggled');
-          }, 550);
-          $('.home').removeClass('nav-open-absolute');
-        } else {
-          setTimeout(function() {
-            $toggle.addClass('toggled');
-          }, 580);
-          const div = '<div id="homeBodyClick"></div>';
-          $(div)
-            .appendTo('.home')
-            .click(function() {
-              $('.home').removeClass('nav-open');
-              if ($('nav').hasClass('navbar-absolute')) {
-                $('.home').removeClass('nav-open-absolute');
-              }
-              materialKit.misc.navbar_menu_visible = 0;
-              $('#homeBodyClick').remove();
-              setTimeout(function() {
-                $toggle.removeClass('toggled');
-              }, 550);
-            });
-          if ($('nav').hasClass('navbar-absolute')) {
-            $('.home').addClass('nav-open-absolute');
-          }
-          $('.home').addClass('nav-open');
-          materialKit.misc.navbar_menu_visible = 1;
-        }
-      });
-      let materialKit = {
-        misc: {
-          navbar_menu_visible: 0,
-          window_width: 0,
-          transparent: true,
-          fixedTop: false,
-          navbar_initialized: false,
-          isWindow: document['documentMode'] || /Edge/.test(navigator.userAgent)
-        },
-        initFormExtendedDatetimepickers: function() {
-          $('.datetimepicker').datetimepicker({
-            icons: {
-              time: 'fa fa-clock-o',
-              date: 'fa fa-calendar',
-              up: 'fa fa-chevron-up',
-              down: 'fa fa-chevron-down',
-              previous: 'fa fa-chevron-left',
-              next: 'fa fa-chevron-right',
-              today: 'fa fa-screenshot',
-              clear: 'fa fa-trash',
-              close: 'fa fa-remove'
-            }
-          });
-        },
-        checkScrollForParallax: function() {
-          const oVal = $(window).scrollTop() / 3;
-          big_image.css({
-            transform: 'translate3d(0,' + oVal + 'px,0)',
-            '-webkit-transform': 'translate3d(0,' + oVal + 'px,0)',
-            '-ms-transform': 'translate3d(0,' + oVal + 'px,0)',
-            '-o-transform': 'translate3d(0,' + oVal + 'px,0)'
-          });
-        },
-        checkScrollForTransparentNavbar: this.debounce(
-          function() {
-            if ($(document).scrollTop() > this.scroll_distance) {
-              if (materialKit.misc.transparent) {
-                materialKit.misc.transparent = false;
-                $('.navbar-color-on-scroll').removeClass('navbar-transparent');
-              }
-            } else {
-              if (!materialKit.misc.transparent) {
-                materialKit.misc.transparent = true;
-                $('.navbar-color-on-scroll').addClass('navbar-transparent');
-              }
-            }
-          },
-          17,
-          null
-        )
-      };
-      // Returns a function, that, as long as it continues to be invoked, will not
-      // be triggered. The function will be called after it stops being called for
-      // N milliseconds. If `immediate` is passed, trigger the function on the
-      // leading edge, instead of the trailing.
       const BrowserDetect = {
         init: function() {
           this.browser = this.searchString(this.dataBrowser) || 'Other';
@@ -219,6 +105,114 @@ export class HomeComponent implements OnInit {
           }
         ]
       };
+      BrowserDetect.init();
+      // Init Material scripts for buttons ripples, inputs animations etc, more info on the next link
+      // https://github.com/FezVrasta/bootstrap-material-design#materialjs
+      $('body').bootstrapMaterialDesign();
+      const window_width = $(window).width();
+      const $navbar = $('.navbar[color-on-scroll]');
+      const scroll_distance = $navbar.attr('color-on-scroll') || 500;
+      const $navbar_collapse = $('.navbar').find('.navbar-collapse');
+      //  Activate the Tooltips
+      $('[data-toggle="tooltip"], [rel="tooltip"]').tooltip();
+      // Activate Popovers
+      $('[data-toggle="popover"]').popover();
+      $(document).on('click', '.navbar-toggler', function() {
+        const $toggle = $(this);
+        if (materialKit.misc.navbar_menu_visible == 1) {
+          $('.home').removeClass('nav-open');
+          materialKit.misc.navbar_menu_visible = 0;
+          $('#homeBodyClick').remove();
+          setTimeout(function() {
+            $toggle.removeClass('toggled');
+          }, 550);
+          $('.home').removeClass('nav-open-absolute');
+        } else {
+          setTimeout(function() {
+            $toggle.addClass('toggled');
+          }, 580);
+          const div = '<div id="homeBodyClick"></div>';
+          $(div)
+            .appendTo('.home')
+            .click(function() {
+              $('.home').removeClass('nav-open');
+              if ($('nav').hasClass('navbar-absolute')) {
+                $('.home').removeClass('nav-open-absolute');
+              }
+              materialKit.misc.navbar_menu_visible = 0;
+              $('#homeBodyClick').remove();
+              setTimeout(function() {
+                $toggle.removeClass('toggled');
+              }, 550);
+            });
+          if ($('nav').hasClass('navbar-absolute')) {
+            $('.home').addClass('nav-open-absolute');
+          }
+          $('.home').addClass('nav-open');
+          materialKit.misc.navbar_menu_visible = 1;
+        }
+      });
+      const materialKit = {
+        misc: {
+          navbar_menu_visible: 0,
+          window_width: 0,
+          transparent: true,
+          fixedTop: false,
+          navbar_initialized: false,
+          isWindow: document['documentMode'] || /Edge/.test(navigator.userAgent)
+        },
+        initFormExtendedDatetimepickers: function() {
+          $('.datetimepicker').datetimepicker({
+            icons: {
+              time: 'fa fa-clock-o',
+              date: 'fa fa-calendar',
+              up: 'fa fa-chevron-up',
+              down: 'fa fa-chevron-down',
+              previous: 'fa fa-chevron-left',
+              next: 'fa fa-chevron-right',
+              today: 'fa fa-screenshot',
+              clear: 'fa fa-trash',
+              close: 'fa fa-remove'
+            }
+          });
+        },
+        checkScrollForParallax: function() {
+          const oVal = $(window).scrollTop() / 3;
+          big_image.css({
+            transform: 'translate3d(0,' + oVal + 'px,0)',
+            '-webkit-transform': 'translate3d(0,' + oVal + 'px,0)',
+            '-ms-transform': 'translate3d(0,' + oVal + 'px,0)',
+            '-o-transform': 'translate3d(0,' + oVal + 'px,0)'
+          });
+        },
+        checkScrollForTransparentNavbar: this.debounce(
+          function() {
+            if ($(document).scrollTop() > scroll_distance) {
+              if (materialKit.misc.transparent) {
+                materialKit.misc.transparent = false;
+                $('.navbar-color-on-scroll').removeClass('navbar-transparent');
+              }
+            } else {
+              if (!materialKit.misc.transparent) {
+                materialKit.misc.transparent = true;
+                $('.navbar-color-on-scroll').addClass('navbar-transparent');
+              }
+            }
+          },
+          17,
+          null
+        )
+      };
+      if ($('.navbar-color-on-scroll').length !== 0) {
+        $(window).on('scroll', materialKit.checkScrollForTransparentNavbar);
+      }
+      materialKit.checkScrollForTransparentNavbar();
+      if (window_width >= 768) {
+        big_image = $('.page-header[data-parallax="true"]');
+        if (big_image.length !== 0) {
+          $(window).on('scroll', materialKit.checkScrollForParallax);
+        }
+      }
       const better_browser =
         '<div class="container"><div class="better-browser row"><div class="col-md-2"></div><div class="col-md-8"><h3>We are sorry but it looks like your Browser doesn\'t support our website Features. In order to get the full experience please download a new version of your favourite browser.</h3></div><div class="col-md-2"></div><br><div class="col-md-4"><a href="https://www.mozilla.org/ro/firefox/new/" class="btn btn-warning">Mozilla</a><br></div><div class="col-md-4"><a href="https://www.google.com/chrome/browser/desktop/index.html" class="btn ">Chrome</a><br></div><div class="col-md-4"><a href="http://windows.microsoft.com/en-us/internet-explorer/ie-11-worldwide-languages" class="btn">Internet Explorer</a><br></div><br><br><h4>Thank you!</h4></div></div>';
     }
@@ -227,6 +221,10 @@ export class HomeComponent implements OnInit {
   /*! This method was extracted from the original code of "material-kit.js" and pulled it out
    * from the ngOnInit method to simplify its usage.
    */
+  // Returns a function, that, as long as it continues to be invoked, will not
+  // be triggered. The function will be called after it stops being called for
+  // N milliseconds. If `immediate` is passed, trigger the function on the
+  // leading edge, instead of the trailing.
   debounce(func, wait, immediate): any {
     let timeout;
     return function() {

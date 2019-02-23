@@ -248,7 +248,7 @@ export class HomeComponent implements OnInit {
 
   scrollToAboutProject(): void {
     if ($('.section-basic').length !== 0) {
-        if($('#homeBodyClick')){
+        if($('#homeBodyClick')) {
           $('#homeBodyClick').trigger('click');
         }
         $('html, body').animate({

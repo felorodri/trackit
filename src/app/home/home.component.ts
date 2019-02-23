@@ -18,14 +18,13 @@ export class HomeComponent implements OnInit {
     public router: Router,
     private notify: NotificationsService,
     private trans: TranslationsService
-  ) {
-    this.currentDate = new Date();
-  }
+  ) {}
 
   ngOnInit() {
     if (this.auth.currentUser()) {
       this.router.navigate(['/dashboard']);
     } else {
+      this.currentDate = new Date();
       /*! The following piece of code was taken, converted to typescript and modifiedfrom the file titled "material-kit.js" of the
        * free material kit created by Creative Tim.
        * Copyright notice added as required.
@@ -113,46 +112,7 @@ export class HomeComponent implements OnInit {
       const $navbar = $('.navbar[color-on-scroll]');
       const scroll_distance = $navbar.attr('color-on-scroll') || 500;
       const $navbar_collapse = $('.navbar').find('.navbar-collapse');
-      //  Activate the Tooltips
-      $('[data-toggle="tooltip"], [rel="tooltip"]').tooltip();
-      // Activate Popovers
-      $('[data-toggle="popover"]').popover();
-      $(document).on('click', '.navbar-toggler', function() {
-        const $toggle = $(this);
-        if (materialKit.misc.navbar_menu_visible == 1) {
-          $('.home').removeClass('nav-open');
-          materialKit.misc.navbar_menu_visible = 0;
-          $('#homeBodyClick').remove();
-          setTimeout(function() {
-            $toggle.removeClass('toggled');
-          }, 550);
-          $('.home').removeClass('nav-open-absolute');
-        } else {
-          setTimeout(function() {
-            $toggle.addClass('toggled');
-          }, 580);
-          const div = '<div id="homeBodyClick"></div>';
-          $(div)
-            .appendTo('.home')
-            .click(function() {
-              $('.home').removeClass('nav-open');
-              if ($('nav').hasClass('navbar-absolute')) {
-                $('.home').removeClass('nav-open-absolute');
-              }
-              materialKit.misc.navbar_menu_visible = 0;
-              $('#homeBodyClick').remove();
-              setTimeout(function() {
-                $toggle.removeClass('toggled');
-              }, 550);
-            });
-          if ($('nav').hasClass('navbar-absolute')) {
-            $('.home').addClass('nav-open-absolute');
-          }
-          $('.home').addClass('nav-open');
-          materialKit.misc.navbar_menu_visible = 1;
-        }
-      });
-      const materialKit = {
+      let materialKit = {
         misc: {
           navbar_menu_visible: 0,
           window_width: 0,
@@ -203,6 +163,47 @@ export class HomeComponent implements OnInit {
           null
         )
       };
+      //  Activate the Tooltips
+      $('[data-toggle="tooltip"], [rel="tooltip"]').tooltip();
+      // Activate Popovers
+      $('[data-toggle="popover"]').popover();
+      $(document).on('click', '.navbar-toggler', function() {
+        const $toggle = $(this);
+        console.log('variable', materialKit.misc.navbar_menu_visible);
+        if (materialKit.misc.navbar_menu_visible === 1) {
+          $('.home').removeClass('nav-open');
+          materialKit.misc.navbar_menu_visible = 0;
+          $('#homeBodyClick').remove();
+          console.log('Entra al if');
+          setTimeout(function() {
+            $toggle.removeClass('toggled');
+          }, 550);
+          $('.home').removeClass('nav-open-absolute');
+        } else {
+          setTimeout(function() {
+            $toggle.addClass('toggled');
+          }, 580);
+          const div = '<div id="homeBodyClick"></div>';
+          $(div)
+            .appendTo('.home')
+            .click(function() {
+              $('.home').removeClass('nav-open');
+              if ($('nav').hasClass('navbar-absolute')) {
+                $('.home').removeClass('nav-open-absolute');
+              }
+              materialKit.misc.navbar_menu_visible = 0;
+              $('#homeBodyClick').remove();
+              setTimeout(function() {
+                $toggle.removeClass('toggled');
+              }, 550);
+            });
+          if ($('nav').hasClass('navbar-absolute')) {
+            $('.home').addClass('nav-open-absolute');
+          }
+          $('.home').addClass('nav-open');
+          materialKit.misc.navbar_menu_visible = 1;
+        }
+      });
       if ($('.navbar-color-on-scroll').length !== 0) {
         $(window).on('scroll', materialKit.checkScrollForTransparentNavbar);
       }
@@ -241,5 +242,20 @@ export class HomeComponent implements OnInit {
         func.apply(context, args);
       }
     };
+  }
+
+  scrollToAboutMe(): void {
+
+  }
+
+  scrollToAboutProject(): void {
+    if ($('.section-basic').length !== 0) {
+        if($('#homeBodyClick')){
+          $('#homeBodyClick').trigger('click');
+        }
+        $('html, body').animate({
+          scrollTop: $('.section-basic').offset().top
+        }, 1000);
+      }
   }
 }

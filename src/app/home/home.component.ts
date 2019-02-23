@@ -112,7 +112,7 @@ export class HomeComponent implements OnInit {
       const $navbar = $('.navbar[color-on-scroll]');
       const scroll_distance = $navbar.attr('color-on-scroll') || 500;
       const $navbar_collapse = $('.navbar').find('.navbar-collapse');
-      let materialKit = {
+      const materialKit = {
         misc: {
           navbar_menu_visible: 0,
           window_width: 0,
@@ -167,14 +167,12 @@ export class HomeComponent implements OnInit {
       $('[data-toggle="tooltip"], [rel="tooltip"]').tooltip();
       // Activate Popovers
       $('[data-toggle="popover"]').popover();
-      $(document).on('click', '.navbar-toggler', function() {
+      $('.home').on('click', '.navbar-toggler', function() {
         const $toggle = $(this);
-        console.log('variable', materialKit.misc.navbar_menu_visible);
         if (materialKit.misc.navbar_menu_visible === 1) {
           $('.home').removeClass('nav-open');
           materialKit.misc.navbar_menu_visible = 0;
           $('#homeBodyClick').remove();
-          console.log('Entra al if');
           setTimeout(function() {
             $toggle.removeClass('toggled');
           }, 550);

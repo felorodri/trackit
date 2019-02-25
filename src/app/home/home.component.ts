@@ -256,4 +256,8 @@ export class HomeComponent implements OnInit {
         }, 1000);
       }
   }
+
+  changeLanguage(language) {
+
+  }
 }

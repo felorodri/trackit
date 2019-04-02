@@ -17,9 +17,9 @@ import { TestBed } from '@angular/core/testing';
 @Injectable()
 export class AuthService {
   private appUser: User;
-  private user: Observable<firebase.User>;
-  private userData: firebase.User = null;
+  private afUserObs: any;
   private token = null;
+  private authState: any = null;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -28,7 +28,7 @@ export class AuthService {
     private enc: EncryptionService,
     private notify: NotificationsService
   ) {
-    if (sessionStorage.getItem('user') && sessionStorage.getItem('token')) {
+    if (this.authState && sessionStorage.getItem('user') && sessionStorage.getItem('token')) {
       const storedData = JSON.parse(
         enc.decrypt(
           sessionStorage.getItem('token'),
@@ -43,26 +43,24 @@ export class AuthService {
         storedData.language
       );
     } else {
-      this.user = this.afAuth.authState;
-      this.user.subscribe(user => {
+      this.afUserObs = this.afAuth.authState;
+      this.afUserObs.subscribe(user => {
         if (user) {
-          this.userData = user;
+          this.authState = user;
           this.appUser = new User(
-            this.userData.displayName,
-            this.userData.email,
-            this.userData,
+            user.displayName,
+            user.email,
+            this.authState,
             'es'
           );
-          sessionStorage.setItem(
-            'user',
-            enc.encrypt(
-              this.userData['refreshToken'],
-              JSON.stringify(this.appUser)
-            )
-          );
-          sessionStorage.setItem('token', this.userData['refreshToken']);
+          sessionStorage.setItem('user', enc.encrypt(user['refreshToken'], JSON.stringify(this.appUser)));
+          sessionStorage.setItem('token', user['refreshToken']);
         } else {
-          this.userData = null;
+          this.authState = null;
+          this.appUser = null;
+          sessionStorage.removeItem('user');
+          sessionStorage.removeItem('token');
+          this.router.navigate(['/home']);
         }
       });
     }
@@ -98,12 +96,12 @@ export class AuthService {
 
   // This method is executed to logout the user from the app
   logout(): void {
-    if (this.isAuthenticated) {
+    if (this.authState && this.isAuthenticated) {
       this.afAuth.auth
         .signOut()
         .then(() => {
           this.appUser = null;
-          this.userData = null;
+          this.authState = null;
           sessionStorage.removeItem('user');
           sessionStorage.removeItem('token');
           this.router.navigate(['']);
@@ -125,7 +123,7 @@ export class AuthService {
       .then(() => {
         this.zone.run(() => {
           this.notify.showSuccess();
-          this.router.navigate(['/home']);
+          // this.router.navigate(['/dashboard']);
         });
       })
       .catch(error => this.loginErrorHandler(error));
@@ -149,7 +147,7 @@ export class AuthService {
 
   // This method returns the current user info.
   isAuthenticated(): boolean {
-    if (this.appUser) {
+    if (this.authState && this.appUser) {
       return true;
     } else {
       return false;

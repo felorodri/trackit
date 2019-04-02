@@ -18,7 +18,11 @@ export class HomeComponent implements OnInit {
     public router: Router,
     private notify: NotificationsService,
     private trans: TranslationsService
-  ) {}
+  ) {
+    if (this.auth.currentUser()) {
+      this.router.navigate(['/dashboard']);
+    }
+  }
 
   ngOnInit() {
     if (this.auth.currentUser()) {
@@ -107,7 +111,7 @@ export class HomeComponent implements OnInit {
       BrowserDetect.init();
       // Init Material scripts for buttons ripples, inputs animations etc, more info on the next link
       // https://github.com/FezVrasta/bootstrap-material-design#materialjs
-      $('body').bootstrapMaterialDesign();
+      // $('body').bootstrapMaterialDesign();
       const window_width = $(window).width();
       const $navbar = $('.navbar[color-on-scroll]');
       const scroll_distance = $navbar.attr('color-on-scroll') || 500;
@@ -248,7 +252,7 @@ export class HomeComponent implements OnInit {
 
   scrollToAboutProject(): void {
     if ($('.section-basic').length !== 0) {
-        if($('#homeBodyClick')) {
+        if ($('#homeBodyClick')) {
           $('#homeBodyClick').trigger('click');
         }
         $('html, body').animate({
@@ -257,7 +261,7 @@ export class HomeComponent implements OnInit {
       }
   }
 
-  changeLanguage(language) {
+  changeLanguage(language): void {
 
   }
 }
